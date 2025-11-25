@@ -431,7 +431,7 @@ Acesse a documentação interativa:
 3. O endereço e frete serão calculados
 
 **Opção B - Geolocalização:**
-1. Clique em **"📍 Usar minha localização"**
+1. Clique em **"Usar minha localização"**
 2. Permita o acesso à localização no navegador
 3. Aguarde enquanto busca seu endereço
 4. Frete calculado automaticamente
@@ -450,70 +450,70 @@ Acesse o arquivo `test-api.html` no navegador ou use Postman/Insomnia.
 ### Testar Funcionalidades
 
 **Autenticação:**
-- [x] Login com email (sem senha)
-- [x] Token gerado e validado
-- [x] Logout limpa dados locais
-- [x] Token expira em 24h
+- Login com email (sem senha)
+- Token gerado e validado
+- Logout limpa dados locais
+- Token expira em 24h
 
 **Carrinho (sem login):**
-- [x] Adicionar produto
-- [x] Alterar quantidade
-- [x] Remover produto
-- [x] Persistência no localStorage
+- Adicionar produto
+- Alterar quantidade
+- Remover produto
+- Persistência no localStorage
 
 **Carrinho (com login):**
-- [x] Sincronização backend ↔ localStorage
-- [x] Primeiro login: transfere carrinho local
-- [x] Login posterior: carrega carrinho salvo
-- [x] Separação total entre usuários
-- [x] Alterações sincronizadas em tempo real
-- [x] Logout não perde dados do backend
+- Sincronização backend ↔ localStorage
+- Primeiro login: transfere carrinho local
+- Login posterior: carrega carrinho salvo
+- Separação total entre usuários
+- Alterações sincronizadas em tempo real
+- Logout não perde dados do backend
 
 **Frete:**
-- [x] Buscar CEP válido: `01310-100` (Av. Paulista, SP)
-- [x] CEP inválido: `00000-000`
-- [x] Geolocalização (permissão concedida)
-- [x] Geolocalização (permissão negada)
+- Buscar CEP válido: `01310-100` (Av. Paulista, SP)
+- CEP inválido: `00000-000`
+- Geolocalização (permissão concedida)
+- Geolocalização (permissão negada)
 
 **Cupons:**
-- [x] Cupom válido: `DESCONTO10`
-- [x] Cupom fixo: `50OFF`
-- [x] Cupom inválido: `TESTE123`
-- [x] Cupom expirado (altere data no código)
+- Cupom válido: `DESCONTO10`
+- Cupom fixo: `50OFF`
+- Cupom inválido: `TESTE123`
+- Cupom expirado (altere data no código)
 
 **Erros:**
-- [x] API offline (desligue o backend)
-- [x] Timeout (simule conexão lenta)
-- [x] Geolocalização indisponível
+- API offline (desligue o backend)
+- Timeout (simule conexão lenta)
+- Geolocalização indisponível
 
 ---
 
 ##  Requisitos Atendidos
 
 ###  Frontend
-- [x] Listagem de itens da sacola (nome, preço, qtd, subtotal, remover)
-- [x] Cálculo de frete por CEP
-- [x] **Botão "Usar minha localização" com Geolocation API**
-- [x] Aplicação de cupom (validação ativo/expirado, percentual/fixo)
-- [x] LocalStorage (itens, cupom, frete, endereço)
-- [x] Eventos DOM (alterar qtd, remover, atualizar totais)
-- [x] **Tratamento de erros com try...catch...finally**
-- [x] Mensagens amigáveis ao usuário
-- [x] Integração com API backend
+- Listagem de itens da sacola (nome, preço, qtd, subtotal, remover)
+- Cálculo de frete por CEP
+- **Botão "Usar minha localização" com Geolocation API**
+- Aplicação de cupom (validação ativo/expirado, percentual/fixo)
+- LocalStorage (itens, cupom, frete, endereço)
+- Eventos DOM (alterar qtd, remover, atualizar totais)
+- **Tratamento de erros com try...catch...finally**
+- Mensagens amigáveis ao usuário
+- Integração com API backend
 
 ###  Backend
-- [x] API RESTful com CRUD completo
-- [x] PostgreSQL como banco de dados
-- [x] Arquitetura MVC (Controller → Service → Repository)
-- [x] **Sistema de autenticação com tokens** (24h de validade)
-- [x] **Persistência de carrinho por usuário** (tabelas: usuarios, tokens, sacolas, sacola_info)
-- [x] **Middleware de autenticação** para rotas protegidas
-- [x] **UPSERT em sacola** (adiciona ou atualiza item sem duplicar)
-- [x] Documentação Swagger
-- [x] Health check endpoint
-- [x] CORS habilitado
-- [x] Variáveis de ambiente (.env)
-- [x] Deploy em produção (Render)
+- API RESTful com CRUD completo
+- PostgreSQL como banco de dados
+- Arquitetura MVC (Controller → Service → Repository)
+- **Sistema de autenticação com tokens** (24h de validade)
+- **Persistência de carrinho por usuário** (tabelas: usuarios, tokens, sacolas, sacola_info)
+- **Middleware de autenticação** para rotas protegidas
+- **UPSERT em sacola** (adiciona ou atualiza item sem duplicar)
+- Documentação Swagger
+- Health check endpoint
+- CORS habilitado
+- Variáveis de ambiente (.env)
+- Deploy em produção (Render)
 
 ---
 
