@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Filtro Categoria</title>
+    <style>
+        body{font-family:system-ui;padding:20px;max-width:800px;margin:0 auto}
+        button{padding:10px 20px;margin:5px;cursor:pointer}
+        pre{background:#f4f4f4;padding:15px;border-radius:6px;overflow:auto}
+        .resultado{margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:6px}
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Filtro por Categoria</h1>
+    
+    <div>
+        <h3>Testar Endpoints:</h3>
+        <button onclick="testar('')">Todos os produtos</button>
+        <button onclick="testar('1')">Categoria 1</button>
+        <button onclick="testar('2')">Categoria 2</button>
+        <button onclick="testar('3')">Categoria 3</button>
+    </div>
+    
+    <div class="resultado">
+        <h3>Resultado:</h3>
+        <p id="status">Clique em um botão para testar</p>
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        const API_BASE = 'https://backend-api-5i28.onrender.com';
+        // const API_BASE = 'http://localhost:3001'; // Descomente para testar local
+        
+        async function testar(categoria){
+            const statusEl = document.getElementById('status');
+            const outputEl = document.getElementById('output');
+            
+            let url = `${API_BASE}/api/v1/produtos`;
+            if(categoria){
+                url += `?categoria=${categoria}`;
+            }
+            
+            statusEl.textContent = `⏳ Buscando: ${url}`;
+            outputEl.textContent = 'Carregando...';
+            
+            try{
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                statusEl.textContent = `✅ Status: ${res.status} - ${data.length || 0} produtos encontrados`;
+                outputEl.textContent = JSON.stringify(data, null, 2);
+                
+                console.log('URL:', url);
+                console.log('Produtos:', data);
+                
+            }catch(err){
+                statusEl.textContent = `❌ Erro: ${err.message}`;
+                outputEl.textContent = err.stack;
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+</html>

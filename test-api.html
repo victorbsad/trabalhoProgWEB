@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste API Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .produto {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .produto h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .preco {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .estoque {
+            color: #666;
+        }
+        .erro {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .sucesso {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        #loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛍️ Teste API Produtos - SQL Server</h1>
+    
+    <div id="loading">Carregando produtos...</div>
+    <div id="status"></div>
+    <div id="produtos"></div>
+
+    <script>
+        const API_URL = 'https://backend-api-5i28.onrender.com/api/v1/produtos';
+
+        async function testarAPI() {
+            const loadingDiv = document.getElementById('loading');
+            const statusDiv = document.getElementById('status');
+            const produtosDiv = document.getElementById('produtos');
+
+            try {
+                console.log('Buscando produtos em:', API_URL);
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const produtos = await response.json();
+                
+                loadingDiv.style.display = 'none';
+                statusDiv.innerHTML = `<div class="sucesso">✅ API funcionando! ${produtos.length} produto(s) encontrado(s)</div>`;
+                
+                if (produtos.length === 0) {
+                    produtosDiv.innerHTML = '<p>Nenhum produto cadastrado no banco.</p>';
+                    return;
+                }
+                
+                produtosDiv.innerHTML = produtos.map(produto => `
+                    <div class="produto">
+                        <h3>${produto.nome}</h3>
+                        <p>${produto.descricao || 'Sem descrição'}</p>
+                        <p class="preco">R$ ${Number(produto.preco).toFixed(2)}</p>
+                        <p class="estoque">Estoque: ${produto.estoque} unidades</p>
+                        <small style="color: #999;">ID: ${produto.id}</small>
+                    </div>
+                `).join('');
+                
+                console.log('Produtos:', produtos);
+                
+            } catch (error) {
+                loadingDiv.style.display = 'none';
+                statusDiv.innerHTML = `<div class="erro">❌ Erro ao buscar produtos: ${error.message}</div>`;
+                console.error('Erro completo:', error);
+                
+                // Instruções de troubleshooting
+                produtosDiv.innerHTML = `
+                    <h3>🔧 Troubleshooting:</h3>
+                    <ol>
+                        <li>Verifique se o servidor backend está rodando em https://backend-api-5i28.onrender.com</li>
+                        <li>A API está no Render e conectada ao PostgreSQL</li>
+                        <li>Verifique se o banco de dados está conectado (veja logs do servidor)</li>
+                        <li>Teste o endpoint health: <a href="https://backend-api-5i28.onrender.com/health" target="_blank">https://backend-api-5i28.onrender.com/health</a></li>
+                    </ol>
+                `;
+            }
+        }
+
+        // Executar teste ao carregar a página
+        testarAPI();
+    </script>
+</body>
+</html>

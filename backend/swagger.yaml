@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Catálogo (integrado - memória)
+  version: '1.0.0'
+servers:
+  - url: http://localhost:3001
+paths:
+  /api/v1/produtos:
+    get:
+      summary: Lista produtos (em memória)
+      responses:
+        '200':
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /api/v1/produtos/{id}:
+    get:
+      summary: Obter produto por id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produto não encontrado
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        descricao:
+          type: string
+        preco:
+          type: number
+          format: float
+        estoque:
+          type: integer
+        categoria_id:
+          type: integer
+        criado_em:
+          type: string
+        atualizado_em:
+          type: string

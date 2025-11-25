@@ -1,0 +1,21 @@
+{
+  "name": "06-backend-integrado-catalogo",
+  "version": "1.0.0",
+  "description": "API de catálogo integrada ao projeto 06 (cópia leve do projeto 09)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "npx nodemon src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "pg": "^8.16.3",
+    "swagger-ui-express": "^4.6.3",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}

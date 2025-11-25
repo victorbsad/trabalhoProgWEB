@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - E-commerce Completo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER COM MENU DE NAVEGAÇÃO -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>🛍️ TechStore</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="#home" id="nav-home" class="nav-link active">Home</a>
+                <a href="#produtos" id="nav-produtos" class="nav-link">Produtos</a>
+                <a href="#carrinho" id="nav-carrinho" class="nav-link">Carrinho (<span id="cart-count">0</span>)</a>
+                <a href="#login" id="nav-login" class="nav-link">Login</a>
+                <span id="user-logged" style="display:none;color:#0b6b3a;font-weight:600;margin-left:16px">👤 <span id="user-email-display"></span></span>
+                <button id="btn-logout" class="btn-logout" style="display:none">Sair</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- HOME COM BANNER -->
+        <section id="home-section" class="page-section active">
+            <div class="banner">
+                <div class="banner-content">
+                    <h2>Bem-vindo à TechStore</h2>
+                    <p>Os melhores produtos de tecnologia com preços incríveis!</p>
+                    <a href="#produtos" class="btn-primary" id="banner-cta">Ver Produtos</a>
+                </div>
+                <div class="banner-image">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=400&fit=crop" alt="Banner TechStore">
+                </div>
+            </div>
+            
+            <div class="home-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Frete Calculado</h3>
+                    <p>Calcule o frete por CEP ou use sua localização</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎟️</div>
+                    <h3>Cupons de Desconto</h3>
+                    <p>Aproveite cupons especiais para economizar</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Pagamento Seguro</h3>
+                    <p>Suas compras protegidas e garantidas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATÁLOGO DE PRODUTOS -->
+        <section id="catalog-section" class="page-section">
+            <h2 class="section-title">Nossos Produtos</h2>
+            <div class="controls">
+                <select id="category-filter">
+                    <option value="">Todas as categorias</option>
+                    <option value="1">Eletrônicos</option>
+                    <option value="2">Informática</option>
+                    <option value="3">Smartphones</option>
+                    <option value="4">Acessórios</option>
+                </select>
+                <input id="search" type="search" placeholder="Buscar por nome...">
+                <button id="reload">Recarregar</button>
+            </div>
+            <p id="status" class="status">Carregando produtos...</p>
+            <div id="products" class="products-grid" aria-live="polite"></div>
+        </section>
+
+        <!-- CARRINHO DE COMPRAS -->
+        <section id="cart-section" class="page-section">
+            <div class="cart-wrap">
+                <h2 class="section-title">Meu Carrinho</h2>
+                <h3>Itens</h3>
+                <div id="item-container" class="item-list">
+                    <!-- renderizado por JS -->
+                </div>
+
+                <div class="frete">
+                    <h3>Frete</h3>
+                    <div class="buscadorCep">
+                        <input type="text" id="CEP" maxlength="9" placeholder="00000-000" inputmode="numeric">
+                        <button id="buscaCEP">Buscar</button>
+                        <button id="usarLocalizacao" class="btn-geolocation">📍 Usar minha localização</button>
+                        <p id="cep-msg" class="cep-msg" aria-live="polite"></p>
+                    </div>
+                    <div class="dados-cep">
+                        <p id="cep-display"></p>
+                        <p id="service"></p>
+                        <p id="state"></p>
+                        <p id="city"></p>
+                        <p id="neighborhood"></p>
+                        <p id="street"></p>
+                    </div>
+                    <div class="vFrete">
+                        <p id="valor-frete"></p>
+                    </div>
+                </div>
+
+                <div class="cupom">
+                    <h3>Cupom</h3>
+                    <div class="cupom-aplic">
+                        <input id="inCupom" type="text" placeholder="Código do cupom">
+                        <button id="btnAplicCupom">Aplicar</button>
+                        <p class="c-status"></p>
+                    </div>
+                </div>
+
+                <div class="totais">
+                    <p class="subtotal-itens">Subtotal produtos: R$ 0,00</p>
+                    <p class="desconto-itens">Desconto: R$ 0,00</p>
+                    <h3 class="total-itens">Total: R$ 0,00</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGIN -->
+        <section id="login-section" class="page-section">
+            <div class="login-container">
+                <h2 class="section-title">Login</h2>
+                <p class="login-subtitle">Entre com seu email para salvar seu carrinho</p>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email:</label>
+                        <input 
+                            type="email" 
+                            id="login-email" 
+                            name="email" 
+                            placeholder="seu@email.com" 
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn-primary" id="btn-login-submit">Entrar</button>
+                    <p id="login-status" class="login-status"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE DETALHES DO PRODUTO -->
+    <div id="product-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <div class="modal-body">
+                <div class="product-image-large">
+                    <img id="modal-image" src="" alt="Produto">
+                </div>
+                <div class="product-info">
+                    <h2 id="modal-nome">Nome do Produto</h2>
+                    <p class="product-category" id="modal-categoria">Categoria</p>
+                    <div class="product-price" id="modal-preco">R$ 0,00</div>
+                    <div class="product-description">
+                        <h3>Descrição</h3>
+                        <p id="modal-descricao">Descrição do produto...</p>
+                    </div>
+                    <div class="product-stock">
+                        <span id="modal-estoque">Em estoque</span>
+                    </div>
+                    <button class="btn-add-large" id="modal-add-cart">Adicionar à Sacola</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth-sacola.js?v=2.1"></script>
+    <script src="script.js?v=7.0"></script>
+</body>
+</html>
